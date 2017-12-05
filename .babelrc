@@ -1,10 +1,13 @@
 {
     "presets": ["es2015", "stage-0", "react"],
     "plugins": [
-        "transform-runtime",
-        ["import", {
-            "libraryName": "antd",
-            "style": "css"
-        }]
+        "transform-decorators-legacy",
+        [
+            "import",
+            {
+                "libraryName": "antd",
+                "style": "css"
+            }
+        ] //`style: true` 会加载 less 文件 // antd按需加载配置，import需要安装插件babel-plugin-import；
     ]
 }

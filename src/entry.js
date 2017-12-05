@@ -1,7 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Button } from 'antd'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
+
+import reducer from './reducers'
+const store = createStore(reducer)
+
+import Todo from './views/Todo';
+
 
 const HomePage =() => <div>Home Page</div>
 const UsersPage = () => <div>Users Page</div>
@@ -17,15 +25,17 @@ class App extends React.Component {
         return (
             <div className="primary-layout">
                 <header>
-                    Our React Router 4 App
                     <Route path="/" exact component={HomeHd} />
                     <Route path="/users" exact component={UsersHd} />
+
+                    <Link to="/todo">todo</Link>
                 </header>
                 <main>
                     <Switch>
                         <Route path="/" exact component={HomePage} />
                         <Route path="/users/add" component={UsersAddPage} />
                         <Route path="/users" exact component={UsersPage} />
+                        <Route path="/todo" exact component={Todo} />
                     </Switch>
                 </main>
             </div>
@@ -34,9 +44,11 @@ class App extends React.Component {
 }
 
 ReactDOM.render(
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>
+    <Provider store={store}>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </Provider>
     ,
     document.getElementById('app')
 )
